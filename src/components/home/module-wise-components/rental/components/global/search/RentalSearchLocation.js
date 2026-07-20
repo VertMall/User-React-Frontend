@@ -1,3 +1,12 @@
+import { useEffect, useRef, useState } from "react";
+import { alpha } from "@mui/material/styles";
+import {
+  Autocomplete,
+  InputAdornment,
+  Paper,
+  TextField,
+} from "@mui/material";
+
 const RentalSearchLocation = (props) => {
   const {
     HandleChangeForSearch,
@@ -9,12 +18,10 @@ const RentalSearchLocation = (props) => {
     endIcon,
     startIcon,
     pickLocationFormAddress,
-
     height = "45px",
     width = 350,
     result,
     getCurrentLocation,
-    // isSetCurrentLocation,
     fromHome,
     setOpenMap,
     focusedField,
@@ -33,65 +40,66 @@ const RentalSearchLocation = (props) => {
     };
   }, []);
 
-  const handleMouseDownRecentAddresses = (event, value) => {
+  const handleMouseDownRecentAddresses = (event, selectedValue) => {
     event.stopPropagation();
-    if (value?.isCurrent === "current") {
-      // isSetCurrentLocation?.(true);
-      getCurrentLocation?.(value);
-    } else {
-      if (value) {
-        pickLocationFormAddress?.(value);
-        setDropdownOpen(false);
-      }
+
+    if (selectedValue?.isCurrent === "current") {
+      getCurrentLocation?.(selectedValue);
+    } else if (selectedValue) {
+      pickLocationFormAddress?.(selectedValue);
+      setDropdownOpen(false);
     }
   };
 
-  let recentlyAddress = undefined;
+  let recentlyAddress;
+
   if (typeof window !== "undefined") {
-    recentlyAddress = JSON.parse(localStorage.getItem("destination_location"));
+    const storedAddress = localStorage.getItem(
+      "destination_location"
+    );
+
+    if (storedAddress) {
+      try {
+        recentlyAddress = JSON.parse(storedAddress);
+      } catch (error) {
+        recentlyAddress = undefined;
+      }
+    }
   }
+
   return (
     <Autocomplete
       fullWidth
       disabled={result === false}
       defaultValue={value?.description || []}
       value={value || []}
-      options={predictions || []} // Handle empty predictions gracefully
+      options={predictions || []}
       getOptionLabel={(option) => option.description || ""}
-      onChange={(event, selectedValue) => handleChange(event, selectedValue)}
+      onChange={(event, selectedValue) =>
+        handleChange(event, selectedValue)
+      }
       isOptionEqualToValue={(option, selectedValue) =>
         option.description === selectedValue?.description
       }
       clearOnBlur={false}
-      open={dropdownOpen} // Control dropdown state
-      onOpen={() => setDropdownOpen(true)} // Open dropdown
-      onClose={(event, reason) => {
+      open={dropdownOpen}
+      onOpen={() => setDropdownOpen(true)}
+      onClose={() => {
         if (value?.description) {
           setDropdownOpen(false);
         }
       }}
-      sx={{ width: width, maxWidth: "100%" }}
-      PaperComponent={(props) => (
-        <>
-          {!value?.description && focusedField === "destination" ? (
-            <div>
-              <RecentAddresses
-                pickLocationFormAddress={pickLocationFormAddress}
-                handleMouseDownRecentAddresses={handleMouseDownRecentAddresses}
-                recentlyAddress={recentlyAddress}
-                fromHome={fromHome}
-                setOpenMap={setOpenMap}
-              />
-            </div>
-          ) : (
-            <Paper
-              sx={{
-                borderRadius: "0 0 4px 4px",
-              }}
-              {...props}
-            />
-          )}
-        </>
+      sx={{
+        width,
+        maxWidth: "100%",
+      }}
+      PaperComponent={(paperProps) => (
+        <Paper
+          sx={{
+            borderRadius: "0 0 4px 4px",
+          }}
+          {...paperProps}
+        />
       )}
       renderInput={(params) => (
         <TextField
@@ -99,7 +107,9 @@ const RentalSearchLocation = (props) => {
           onFocus={onFocus}
           label={label}
           placeholder={label}
-          onChange={(event) => HandleChangeForSearch(event)}
+          onChange={(event) =>
+            HandleChangeForSearch(event)
+          }
           onKeyDown={(event) => {
             if (event.key === "Enter" && onEnterKey) {
               event.preventDefault();
@@ -113,26 +123,34 @@ const RentalSearchLocation = (props) => {
           }}
           sx={{
             "& .MuiOutlinedInput-root": {
-              height: height,
+              height,
               padding: "5.5px 4px 7.5px 6px",
               paddingRight: "10px !important",
+
               "& fieldset": {
-                border: `1px solid  ${(theme) => theme.palette.neutral[300]}`,
+                border: `1px solid ${(theme) =>
+                  theme.palette.neutral[300]}`,
               },
+
               "&:hover fieldset": {
                 borderColor: "#888",
               },
+
               "&.Mui-focused fieldset": {
                 border: "1px solid",
-                borderColor: (theme) => alpha(theme.palette.primary.main, 0.4),
+                borderColor: (theme) =>
+                  alpha(theme.palette.primary.main, 0.4),
               },
             },
-            // Keep the input text from sliding under the start icon.
+
             "& .MuiAutocomplete-input": {
-              paddingLeft: startIcon ? "6px !important" : undefined,
+              paddingLeft: startIcon
+                ? "6px !important"
+                : undefined,
               minWidth: 0,
               textOverflow: "ellipsis",
             },
+
             "& .MuiInputLabel-root": {
               padding: "0 4px",
               transform: "translate(14px, -6px) scale(0.75)",
@@ -140,17 +158,25 @@ const RentalSearchLocation = (props) => {
           }}
           InputProps={{
             ...params.InputProps,
+
             startAdornment: startIcon ? (
               <InputAdornment
                 position="start"
-                sx={{ ml: 0.5, mr: 1, flexShrink: 0 }}
+                sx={{
+                  ml: 0.5,
+                  mr: 1,
+                  flexShrink: 0,
+                }}
               >
                 {startIcon}
               </InputAdornment>
             ) : null,
+
             endAdornment: endIcon ? (
-              <InputAdornment position="end">{endIcon}</InputAdornment>
-            ) : null, // Render the endIcon if provided
+              <InputAdornment position="end">
+                {endIcon}
+              </InputAdornment>
+            ) : null,
           }}
           InputLabelProps={{
             shrink: true,
