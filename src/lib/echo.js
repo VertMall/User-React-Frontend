@@ -2,12 +2,19 @@
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 
-// Make Pusher globally available for Laravel Echo
-window.Pusher = Pusher;
+// Make Pusher globally available for Laravel Echo (browser only — this module
+// is also loaded during Next.js server-side rendering, where `window` is undefined)
+if (typeof window !== 'undefined') {
+    window.Pusher = Pusher;
+}
 
 let echoInstance = null;
 
 export const getEcho = () => {
+    if (typeof window === 'undefined') {
+        return null;
+    }
+
     if (echoInstance) {
         return echoInstance;
     }
@@ -36,6 +43,9 @@ export const listenForOrderUpdates = (userId, callback) => {
     }
 
     const echo = getEcho();
+    if (!echo) {
+        return null;
+    }
     console.log(`✅ Listening for order updates for user: ${userId}`);
 
     return echo.private(`user.${userId}`)
