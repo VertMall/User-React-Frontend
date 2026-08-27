@@ -1,8 +1,28 @@
+// src/components/OrderNotification.jsx
 import React, { useEffect, useState } from 'react';
 import { listenForOrderUpdates } from '../lib/echo';
+import { 
+    requestNotificationPermission, 
+    sendBrowserNotification, 
+    playNotificationSound
+} from '../hooks/useBrowserNotifications';
 
 const OrderNotification = ({ userId }) => {
     const [notifications, setNotifications] = useState([]);
+    const [permissionGranted, setPermissionGranted] = useState(false);
+
+    // Request permission when user logs in
+    useEffect(() => {
+        if (userId && "Notification" in window) {
+            if (Notification.permission === "granted") {
+                setPermissionGranted(true);
+            } else if (Notification.permission === "default") {
+                requestNotificationPermission().then(granted => {
+                    setPermissionGranted(granted);
+                });
+            }
+        }
+    }, [userId]);
 
     useEffect(() => {
         if (!userId) {
@@ -11,6 +31,7 @@ const OrderNotification = ({ userId }) => {
         }
 
         const channel = listenForOrderUpdates(userId, (data) => {
+            // Add to notification list
             setNotifications(prev => [{
                 id: Date.now(),
                 orderId: data.order_id,
@@ -19,6 +40,21 @@ const OrderNotification = ({ userId }) => {
                 timestamp: data.timestamp
             }, ...prev]);
 
+            // Play sound
+            playNotificationSound('beep');
+
+            // Send browser push notification
+            if (permissionGranted) {
+                sendBrowserNotification(
+                    `📦 Order #${data.order_id} Updated`,
+                    data.message,
+                    '/favicon.ico',
+                    `/orders/${data.order_id}`,
+                    data.order_id
+                );
+            }
+
+            // Show toast
             showToastNotification(data);
         });
 
@@ -27,9 +63,10 @@ const OrderNotification = ({ userId }) => {
                 channel.stopListening('OrderStatusUpdated');
             }
         };
-    }, [userId]);
+    }, [userId, permissionGranted]);
 
     const showToastNotification = (data) => {
+        // Create toast element
         const toast = document.createElement('div');
         toast.style.cssText = `
             position: fixed;
@@ -54,6 +91,7 @@ const OrderNotification = ({ userId }) => {
         `;
         document.body.appendChild(toast);
         
+        // Remove after 5 seconds
         setTimeout(() => {
             toast.style.opacity = '0';
             toast.style.transition = 'opacity 0.3s';
