@@ -26,6 +26,9 @@ import ModuleChecker from "../src/components/module-select/ModuleChecker";
 import ProSubscriptionExpiredModal from "../src/components/pro-plan/ProSubscriptionExpiredModal";
 import App from "next/app";
 
+// ✅ ADD THIS IMPORT
+import OrderNotification from "../src/components/OrderNotification";
+
 Router.events.on("routeChangeStart", nProgress.start);
 Router.events.on("routeChangeError", nProgress.done);
 Router.events.on("routeChangeComplete", nProgress.done);
@@ -91,6 +94,9 @@ function MyApp(props) {
                       <ModuleChecker />
                       <ProSubscriptionExpiredModal />
                       {getLayout(<Component {...pageProps} />)}
+                      
+                      {/* ✅ ADD ORDER NOTIFICATION COMPONENT */}
+                      <OrderNotification />
                     </RTL>
                   </ThemeProvider>
                 )}
