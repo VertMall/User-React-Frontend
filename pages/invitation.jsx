@@ -5,22 +5,10 @@ import Image from 'next/image';
 const Invitation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [particles, setParticles] = useState([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsOpen(true), 1000);
+    const timer = setTimeout(() => setIsOpen(true), 1200);
     return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const newParticles = Array.from({ length: 25 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 4 + 2,
-      delay: Math.random() * 5
-    }));
-    setParticles(newParticles);
   }, []);
 
   const handleOpen = () => setIsOpen(true);
@@ -29,149 +17,114 @@ const Invitation = () => {
   return (
     <>
       <Head>
-        <title>You're Invited - VertMall Grand Launch</title>
-        <meta name="description" content="Join us for the grand launch of VertMall on 31st August 2026 at 10:00 AM" />
+        <title>VertMall Grand Launch</title>
+        <meta
+          name="description"
+          content="You are invited to witness the official launch of VertMall. Monday, 31st August 2026, 10:00 AM — 10:45 AM, Umuahia."
+        />
         <link rel="icon" href="/logo.png" />
         <link rel="apple-touch-icon" href="/logo.png" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+          rel="stylesheet"
+        />
       </Head>
 
-      <div className="invitation-container">
-        {/* Particles */}
-        <div className="particles-container">
-          {particles.map(p => (
-            <div
-              key={p.id}
-              className="particle"
-              style={{
-                left: `${p.x}%`,
-                top: `${p.y}%`,
-                width: `${p.size}px`,
-                height: `${p.size}px`,
-                animationDelay: `${p.delay}s`,
-                animationDuration: `${4 + p.delay % 3}s`
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Decorative corner elements */}
-        <div className="corner-decoration corner-tl"></div>
-        <div className="corner-decoration corner-tr"></div>
-        <div className="corner-decoration corner-bl"></div>
-        <div className="corner-decoration corner-br"></div>
-
+      <div className="container">
         <div className={`envelope-wrapper ${isOpen ? 'open' : ''}`}>
+          {/* Envelope */}
           <div className="envelope">
-            {/* Envelope front */}
             <div className="envelope-front">
               <div className="envelope-flap"></div>
               <div className="envelope-body">
                 <div className="envelope-content">
                   <div className="envelope-logo">
-                    <Image src="/logo.png" alt="VertMall" width={60} height={60} />
+                    <Image src="/logo.png" alt="VertMall" width={56} height={56} />
                   </div>
                   <div className="envelope-text">
-                    <p className="envelope-title">You're Invited</p>
-                    <p className="envelope-subtitle">VertMall Grand Launch</p>
+                    <span className="envelope-label">Invitation</span>
+                    <span className="envelope-title">VertMall</span>
                   </div>
-                  <div className="envelope-seal">✦</div>
+                  <div className="envelope-accent"></div>
                 </div>
               </div>
             </div>
 
             {/* Letter */}
-            <div className={`letter ${isOpen ? 'slide-out' : ''}`}>
-              <div className={`letter-content ${isFlipped ? 'flipped' : ''}`}>
-                {/* Front of letter */}
+            <div className={`letter ${isOpen ? 'reveal' : ''}`}>
+              <div className={`letter-inner ${isFlipped ? 'flipped' : ''}`}>
+                {/* Front */}
                 <div className="letter-front">
-                  <div className="letter-pattern"></div>
-                  
-                  <div className="letter-inner">
-                    <div className="letter-logo">
-                      <Image src="/logo.png" alt="VertMall" width={70} height={70} />
-                    </div>
-                    
-                    <div className="letter-greeting">
-                      <span className="greeting-line">✦</span>
-                      <h2>Dear Sir/Ma,</h2>
-                      <span className="greeting-line">✦</span>
+                  <div className="letter-content-front">
+                    <div className="letter-header">
+                      <span className="letter-brand">VertMall</span>
+                      <span className="letter-rule"></span>
+                      <span className="letter-event">Grand Launch</span>
                     </div>
 
-                    <p className="letter-invite">
-                      You are specially invited to witness the official launch of <strong>VertMall</strong>.
+                    <h1 className="letter-headline">
+                      You are invited<br />
+                      to witness the<br />
+                      official launch
+                    </h1>
+
+                    <div className="letter-details">
+                      <div className="detail-block">
+                        <span className="detail-label">Date</span>
+                        <span className="detail-value">Monday, 31st August 2026</span>
+                      </div>
+                      <div className="detail-block">
+                        <span className="detail-label">Time</span>
+                        <span className="detail-value">10:00 AM — 10:45 AM</span>
+                      </div>
+                      <div className="detail-block">
+                        <span className="detail-label">Venue</span>
+                        <span className="detail-value">Umuahia</span>
+                      </div>
+                    </div>
+
+                    <div className="letter-divider"></div>
+
+                    <p className="letter-body">
+                      Join us as we unveil a new way to shop, connect,<br />
+                      and experience convenience in Umuahia.
                     </p>
 
-                    <div className="letter-event-details">
-                      <div className="event-item">
-                        <span className="event-icon">📅</span>
-                        <div>
-                          <span className="event-label">Date</span>
-                          <span className="event-value">Monday, 31st August 2026</span>
-                        </div>
-                      </div>
-                      <div className="event-item">
-                        <span className="event-icon">⏰</span>
-                        <div>
-                          <span className="event-label">Time</span>
-                          <span className="event-value">10:00 AM - 10:45 AM</span>
-                        </div>
-                      </div>
-                      <div className="event-item">
-                        <span className="event-icon">📍</span>
-                        <div>
-                          <span className="event-label">Venue</span>
-                          <span className="event-value">Umuahia</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="letter-divider">
-                      <span>✦</span>
-                      <span>✦</span>
-                      <span>✦</span>
-                    </div>
-
-                    <p className="letter-message">
-                      Join us as we unveil a new way to shop, connect, and experience convenience in Umuahia.
-                      <br /><br />
-                      We would be honored to have you experience VertMall firsthand.
+                    <p className="letter-body-secondary">
+                      We would be honored to have you experience<br />
+                      VertMall firsthand.
                     </p>
 
-                    <div className="letter-tagline">
-                      <span>The VertMall Xperience….</span>
+                    <div className="letter-footer">
+                      <span className="letter-tagline">The VertMall Xperience….</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Back of letter */}
+                {/* Back */}
                 <div className="letter-back">
-                  <div className="back-inner">
+                  <div className="letter-content-back">
                     <div className="back-logo">
-                      <Image src="/logo.png" alt="VertMall" width={80} height={80} />
+                      <Image src="/logo.png" alt="VertMall" width={64} height={64} />
                     </div>
-                    
-                    <h3>We Look Forward to Welcoming You</h3>
-                    
-                    <div className="back-details">
-                      <p>
-                        <strong>VertMall</strong><br />
-                        A new way to shop, connect, and experience convenience.
-                      </p>
-                    </div>
+
+                    <h3 className="back-headline">We Look Forward<br />to Welcoming You</h3>
+
+                    <p className="back-body">
+                      VertMall is redefining the shopping experience<br />
+                      in Umuahia and beyond.
+                    </p>
 
                     <div className="back-divider"></div>
 
                     <div className="back-contact">
-                      <p>For questions, reach out to us at:</p>
-                      <a href="mailto:support@thevertmall.com">support@thevertmall.com</a>
+                      <span className="back-contact-label">For questions</span>
+                      <a href="mailto:support@thevertmall.com" className="back-contact-email">
+                        support@thevertmall.com
+                      </a>
                     </div>
 
-                    <div className="back-icons">
-                      <span>🛍️</span>
-                      <span>✦</span>
-                      <span>🎉</span>
-                    </div>
+                    <div className="back-brand">VertMall</div>
                   </div>
                 </div>
               </div>
@@ -180,15 +133,15 @@ const Invitation = () => {
 
           {/* Controls */}
           <div className="controls">
-            {!isOpen && (
-              <button className="open-btn" onClick={handleOpen}>
-                <span className="btn-text">Open Invitation</span>
-                <span className="btn-icon">✦</span>
+            {!isOpen ? (
+              <button className="btn-open" onClick={handleOpen}>
+                <span className="btn-label">Open Invitation</span>
+                <span className="btn-arrow">→</span>
               </button>
-            )}
-            {isOpen && (
-              <button className="flip-btn" onClick={handleFlip}>
-                {isFlipped ? 'Show Front' : 'Flip to Back'}
+            ) : (
+              <button className="btn-flip" onClick={handleFlip}>
+                {isFlipped ? 'Front' : 'Back'}
+                <span className="btn-flip-icon">⟳</span>
               </button>
             )}
           </div>
@@ -201,104 +154,46 @@ const Invitation = () => {
             box-sizing: border-box;
           }
 
-          .invitation-container {
+          .container {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #0d1f12 0%, #1a4a2a 40%, #2d6b3f 100%);
-            font-family: 'Playfair Display', 'Georgia', serif;
-            padding: 20px;
+            background: #0d1f12;
+            font-family: 'Inter', -apple-system, sans-serif;
+            padding: 24px;
             position: relative;
-            overflow: hidden;
           }
-
-          /* Particles */
-          .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-          }
-
-          .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 50%;
-            animation: floatParticle linear infinite;
-            pointer-events: none;
-          }
-
-          @keyframes floatParticle {
-            0% {
-              transform: translateY(100vh) rotate(0deg) scale(0);
-              opacity: 0;
-            }
-            10% {
-              opacity: 1;
-            }
-            90% {
-              opacity: 1;
-            }
-            100% {
-              transform: translateY(-100vh) rotate(720deg) scale(1);
-              opacity: 0;
-            }
-          }
-
-          /* Corner Decorations */
-          .corner-decoration {
-            position: fixed;
-            width: 80px;
-            height: 80px;
-            border: 2px solid rgba(255, 255, 255, 0.06);
-            z-index: 0;
-            pointer-events: none;
-          }
-
-          .corner-tl { top: 30px; left: 30px; border-right: none; border-bottom: none; }
-          .corner-tr { top: 30px; right: 30px; border-left: none; border-bottom: none; }
-          .corner-bl { bottom: 30px; left: 30px; border-right: none; border-top: none; }
-          .corner-br { bottom: 30px; right: 30px; border-left: none; border-top: none; }
 
           .envelope-wrapper {
-            perspective: 1200px;
+            perspective: 1400px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 30px;
-            z-index: 1;
-            position: relative;
+            gap: 32px;
+            width: 100%;
+            max-width: 520px;
           }
 
+          /* Envelope */
           .envelope {
             position: relative;
-            width: 520px;
-            height: 340px;
+            width: 100%;
+            aspect-ratio: 1.45 / 1;
             transform-style: preserve-3d;
-            transition: transform 0.6s ease;
-            animation: floatEnvelope 5s ease-in-out infinite;
-          }
-
-          @keyframes floatEnvelope {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(0.3deg); }
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
           }
 
           .envelope-front {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(145deg, #faf8f5, #f0ebe4);
-            border-radius: 8px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            inset: 0;
+            background: #f7f3ed;
+            border-radius: 4px;
+            box-shadow: 0 16px 64px rgba(0, 0, 0, 0.35);
             overflow: hidden;
             z-index: 2;
             backface-visibility: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
           }
 
           .envelope-flap {
@@ -307,9 +202,9 @@ const Invitation = () => {
             left: 0;
             width: 100%;
             height: 50%;
-            background: linear-gradient(145deg, #f5f0e8, #e8e0d6);
+            background: #f0e9e0;
             clip-path: polygon(0 0, 100% 0, 50% 100%);
-            border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
             transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
             transform-origin: top;
             z-index: 3;
@@ -325,101 +220,102 @@ const Invitation = () => {
             left: 0;
             width: 100%;
             height: 55%;
-            padding: 20px 40px;
+            padding: 20px 32px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            background: linear-gradient(180deg, #faf8f5, #f0ebe4);
-            border-top: 2px solid rgba(0, 0, 0, 0.06);
+            background: #f7f3ed;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
           }
 
           .envelope-content {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 20px;
             width: 100%;
-            justify-content: center;
           }
 
           .envelope-logo {
-            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+            flex-shrink: 0;
           }
 
           .envelope-logo img {
             border-radius: 50%;
+            opacity: 0.9;
           }
 
           .envelope-text {
-            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+          }
+
+          .envelope-label {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #8a7a6a;
+            font-weight: 400;
           }
 
           .envelope-title {
-            font-size: 16px;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: #8a7a6a;
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            margin: 0;
-          }
-
-          .envelope-subtitle {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1a3a2a;
             font-family: 'Playfair Display', serif;
-            margin: 4px 0 0 0;
+            font-size: 22px;
+            font-weight: 600;
+            color: #1a3a2a;
             letter-spacing: 1px;
           }
 
-          .envelope-seal {
-            font-size: 28px;
-            color: #c9a84c;
-            opacity: 0.5;
+          .envelope-accent {
             margin-left: auto;
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(201, 168, 76, 0.25);
+            border-radius: 50%;
+            position: relative;
+          }
+
+          .envelope-accent::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: rgba(201, 168, 76, 0.3);
+            border-radius: 50%;
           }
 
           /* Letter */
           .letter {
             position: absolute;
-            top: 20px;
-            left: 30px;
-            width: calc(100% - 60px);
-            height: calc(100% - 40px);
-            background: #ffffff;
-            border-radius: 6px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
-            transform: translateY(0) scale(0.92);
+            top: 16px;
+            left: 24px;
+            right: 24px;
+            bottom: 16px;
+            background: #fcfaf7;
+            border-radius: 3px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            transform: translateY(0) scale(0.94);
             transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1;
             overflow: hidden;
             transform-origin: bottom center;
             opacity: 0;
             pointer-events: none;
-            border: 1px solid rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.04);
           }
 
-          .letter.slide-out {
-            transform: translateY(-130px) scale(1);
+          .letter.reveal {
+            transform: translateY(-48px) scale(1);
             opacity: 1;
             pointer-events: all;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.2);
             z-index: 5;
-            animation: letterReveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition-delay: 0.1s;
           }
 
-          @keyframes letterReveal {
-            0% {
-              transform: translateY(-60px) scale(0.85) rotate(-2deg);
-              opacity: 0;
-            }
-            100% {
-              transform: translateY(-130px) scale(1) rotate(0deg);
-              opacity: 1;
-            }
-          }
-
-          .letter-content {
+          .letter-inner {
             width: 100%;
             height: 100%;
             position: relative;
@@ -427,186 +323,157 @@ const Invitation = () => {
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
           }
 
-          .letter-content.flipped {
+          .letter-inner.flipped {
             transform: rotateY(180deg);
           }
 
           .letter-front,
           .letter-back {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             backface-visibility: hidden;
             display: flex;
             flex-direction: column;
-            box-sizing: border-box;
-          }
-
-          .letter-front {
-            background: linear-gradient(160deg, #fcfaf7, #f5f0eb);
-            padding: 30px 35px;
-            position: relative;
+            padding: 28px 32px;
             overflow-y: auto;
           }
 
-          .letter-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-              radial-gradient(circle at 20% 50%, rgba(201, 168, 76, 0.03) 0%, transparent 50%),
-              radial-gradient(circle at 80% 50%, rgba(201, 168, 76, 0.03) 0%, transparent 50%);
-            pointer-events: none;
+          .letter-front {
+            background: #fcfaf7;
           }
 
-          .letter-inner {
-            position: relative;
-            z-index: 1;
+          .letter-back {
+            background: #f7f3ed;
+            transform: rotateY(180deg);
+            justify-content: center;
+            align-items: center;
+          }
+
+          .letter-content-front {
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
             flex: 1;
+            max-width: 420px;
+            margin: 0 auto;
+            width: 100%;
           }
 
-          .letter-logo {
-            margin-bottom: 12px;
-            filter: drop-shadow(0 2px 12px rgba(26, 74, 42, 0.15));
-          }
-
-          .letter-logo img {
-            border-radius: 50%;
-          }
-
-          .letter-greeting {
+          .letter-header {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 12px;
+            gap: 12px;
+            margin-bottom: 18px;
           }
 
-          .greeting-line {
-            color: #c9a84c;
-            font-size: 14px;
-            opacity: 0.5;
-          }
-
-          .letter-greeting h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            font-weight: 600;
+          .letter-brand {
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
             color: #1a3a2a;
-            margin: 0;
-            letter-spacing: 0.5px;
+            font-weight: 500;
           }
 
-          .letter-invite {
-            font-size: 16px;
-            color: #2d3d3a;
-            text-align: center;
-            line-height: 1.7;
-            max-width: 420px;
-            margin: 0 0 14px 0;
-            font-family: 'Inter', sans-serif;
-            font-weight: 300;
+          .letter-rule {
+            flex: 1;
+            height: 1px;
+            background: rgba(201, 168, 76, 0.2);
+            max-width: 40px;
           }
 
-          .letter-invite strong {
-            color: #1a4a2a;
+          .letter-event {
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #8a7a6a;
+            font-weight: 400;
+          }
+
+          .letter-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
             font-weight: 600;
+            color: #0d1f12;
+            line-height: 1.2;
+            margin: 0 0 20px 0;
+            letter-spacing: -0.5px;
           }
 
-          .letter-event-details {
+          .letter-details {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            width: 100%;
-            max-width: 380px;
-            background: rgba(255, 255, 255, 0.6);
-            padding: 14px 20px;
-            border-radius: 10px;
-            margin: 6px 0 12px 0;
-            border: 1px solid rgba(201, 168, 76, 0.15);
+            margin-bottom: 16px;
+            padding: 16px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
           }
 
-          .event-item {
+          .detail-block {
             display: flex;
-            align-items: center;
-            gap: 14px;
+            align-items: baseline;
+            gap: 20px;
           }
 
-          .event-icon {
-            font-size: 18px;
-            width: 30px;
-            text-align: center;
-          }
-
-          .event-item div {
-            display: flex;
-            flex-direction: column;
-          }
-
-          .event-label {
-            font-size: 10px;
-            text-transform: uppercase;
+          .detail-label {
+            font-size: 9px;
             letter-spacing: 2px;
+            text-transform: uppercase;
             color: #8a7a6a;
-            font-family: 'Inter', sans-serif;
             font-weight: 500;
+            min-width: 48px;
           }
 
-          .event-value {
+          .detail-value {
             font-size: 14px;
             color: #1a3a2a;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
+            font-weight: 400;
           }
 
           .letter-divider {
-            display: flex;
-            gap: 12px;
-            margin: 8px 0;
-            color: #c9a84c;
-            font-size: 12px;
-            opacity: 0.4;
+            width: 32px;
+            height: 1px;
+            background: rgba(201, 168, 76, 0.25);
+            margin: 4px 0 12px 0;
           }
 
-          .letter-message {
+          .letter-body {
             font-size: 14px;
+            line-height: 1.7;
             color: #2d3d3a;
-            text-align: center;
-            line-height: 1.8;
-            max-width: 380px;
-            margin: 0 0 10px 0;
-            font-family: 'Inter', sans-serif;
             font-weight: 300;
+            margin: 0 0 6px 0;
+          }
+
+          .letter-body-secondary {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #2d3d3a;
+            font-weight: 300;
+            margin: 0 0 16px 0;
+          }
+
+          .letter-footer {
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
           }
 
           .letter-tagline {
             font-family: 'Playfair Display', serif;
-            font-size: 18px;
+            font-size: 15px;
             font-style: italic;
             color: #c9a84c;
-            letter-spacing: 1px;
-            margin-top: 4px;
+            letter-spacing: 0.5px;
           }
 
-          /* Back of letter */
-          .letter-back {
-            background: linear-gradient(160deg, #f5f0eb, #ece6de);
-            transform: rotateY(180deg);
-            padding: 35px;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .back-inner {
-            text-align: center;
+          /* Back */
+          .letter-content-back {
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
+            max-width: 320px;
           }
 
           .back-logo {
@@ -615,243 +482,144 @@ const Invitation = () => {
 
           .back-logo img {
             border-radius: 50%;
-            filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.08));
+            opacity: 0.85;
           }
 
-          .back-inner h3 {
+          .back-headline {
             font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            color: #1a3a2a;
+            font-size: 22px;
+            font-weight: 600;
+            color: #0d1f12;
+            line-height: 1.3;
             margin: 0 0 12px 0;
-            font-weight: 600;
           }
 
-          .back-details {
-            max-width: 320px;
-            margin: 0 auto 12px;
-          }
-
-          .back-details p {
-            font-size: 15px;
+          .back-body {
+            font-size: 14px;
+            line-height: 1.7;
             color: #2d3d3a;
-            line-height: 1.8;
-            font-family: 'Inter', sans-serif;
             font-weight: 300;
-          }
-
-          .back-details strong {
-            color: #1a4a2a;
-            font-weight: 600;
+            margin: 0 0 16px 0;
           }
 
           .back-divider {
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #c9a84c, transparent);
-            margin: 12px auto;
+            width: 32px;
+            height: 1px;
+            background: rgba(201, 168, 76, 0.2);
+            margin: 4px 0 16px 0;
           }
 
           .back-contact {
-            margin: 8px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 20px;
           }
 
-          .back-contact p {
-            font-size: 13px;
-            color: #6a5a4a;
-            font-family: 'Inter', sans-serif;
-            margin: 0 0 4px 0;
+          .back-contact-label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #8a7a6a;
+            font-weight: 400;
           }
 
-          .back-contact a {
-            color: #1a4a2a;
-            text-decoration: none;
-            font-weight: 500;
-            font-family: 'Inter', sans-serif;
+          .back-contact-email {
             font-size: 14px;
+            color: #1a3a2a;
+            text-decoration: none;
+            font-weight: 400;
             transition: color 0.3s ease;
           }
 
-          .back-contact a:hover {
+          .back-contact-email:hover {
             color: #c9a84c;
           }
 
-          .back-icons {
-            display: flex;
-            gap: 20px;
-            font-size: 22px;
-            margin-top: 10px;
-          }
-
-          .back-icons span {
-            animation: bounceIcon 2s ease-in-out infinite;
-          }
-
-          .back-icons span:nth-child(2) { animation-delay: 0.3s; }
-          .back-icons span:nth-child(3) { animation-delay: 0.6s; }
-
-          @keyframes bounceIcon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+          .back-brand {
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #1a3a2a;
+            font-weight: 500;
+            opacity: 0.3;
+            margin-top: 4px;
           }
 
           /* Controls */
           .controls {
             display: flex;
             gap: 16px;
-            margin-top: 10px;
+            margin-top: 4px;
           }
 
-          .open-btn,
-          .flip-btn {
-            padding: 14px 36px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #f5f0eb;
-            font-size: 15px;
-            letter-spacing: 2px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
+          .btn-open,
+          .btn-flip {
             display: flex;
             align-items: center;
             gap: 12px;
+            padding: 12px 28px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border-radius: 2px;
+            font-weight: 400;
           }
 
-          .open-btn:hover,
-          .flip-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.3);
+          .btn-open:hover,
+          .btn-flip:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
           }
 
-          .btn-text {
+          .btn-arrow {
+            font-size: 16px;
+            transition: transform 0.4s ease;
+            display: inline-block;
+          }
+
+          .btn-open:hover .btn-arrow {
+            transform: translateX(4px);
+          }
+
+          .btn-label {
             font-weight: 300;
           }
 
-          .btn-icon {
-            font-size: 14px;
-            transition: transform 0.3s ease;
+          .btn-flip-icon {
+            font-size: 16px;
+            opacity: 0.5;
+            transition: transform 0.6s ease;
+            display: inline-block;
           }
 
-          .open-btn:hover .btn-icon {
-            transform: rotate(90deg);
+          .btn-flip:hover .btn-flip-icon {
+            transform: rotate(180deg);
           }
 
           /* Responsive */
-          @media (max-width: 580px) {
-            .envelope {
-              width: 340px;
-              height: 240px;
+          @media (max-width: 600px) {
+            .envelope-wrapper {
+              max-width: 400px;
             }
 
             .envelope-body {
-              padding: 15px 20px;
+              padding: 16px 20px;
             }
 
             .envelope-content {
               gap: 14px;
-              flex-wrap: wrap;
-              justify-content: center;
-              text-align: center;
-            }
-
-            .envelope-text {
-              text-align: center;
             }
 
             .envelope-title {
-              font-size: 12px;
-              letter-spacing: 4px;
-            }
-
-            .envelope-subtitle {
-              font-size: 16px;
-            }
-
-            .envelope-seal {
-              display: none;
-            }
-
-            .letter {
-              top: 12px;
-              left: 18px;
-              width: calc(100% - 36px);
-              height: calc(100% - 24px);
-            }
-
-            .letter.slide-out {
-              transform: translateY(-75px) scale(1);
-            }
-
-            @keyframes letterReveal {
-              0% {
-                transform: translateY(-35px) scale(0.85) rotate(-2deg);
-                opacity: 0;
-              }
-              100% {
-                transform: translateY(-75px) scale(1) rotate(0deg);
-                opacity: 1;
-              }
-            }
-
-            .letter-front,
-            .letter-back {
-              padding: 20px 18px;
-            }
-
-            .letter-greeting h2 {
               font-size: 18px;
-            }
-
-            .letter-invite {
-              font-size: 14px;
-            }
-
-            .letter-event-details {
-              padding: 10px 14px;
-            }
-
-            .event-value {
-              font-size: 12px;
-            }
-
-            .letter-message {
-              font-size: 13px;
-            }
-
-            .letter-tagline {
-              font-size: 15px;
-            }
-
-            .controls {
-              flex-direction: column;
-              align-items: center;
-            }
-
-            .open-btn,
-            .flip-btn {
-              padding: 12px 28px;
-              font-size: 13px;
-            }
-
-            .particle {
-              display: none;
-            }
-
-            .corner-decoration {
-              width: 40px;
-              height: 40px;
-            }
-          }
-
-          @media (max-width: 380px) {
-            .envelope {
-              width: 290px;
-              height: 210px;
             }
 
             .envelope-logo img {
@@ -859,27 +627,203 @@ const Invitation = () => {
               height: 40px;
             }
 
-            .envelope-title {
-              font-size: 10px;
+            .envelope-accent {
+              width: 22px;
+              height: 22px;
             }
 
-            .envelope-subtitle {
+            .envelope-accent::after {
+              width: 6px;
+              height: 6px;
+            }
+
+            .letter {
+              top: 12px;
+              left: 16px;
+              right: 16px;
+              bottom: 12px;
+            }
+
+            .letter.reveal {
+              transform: translateY(-32px) scale(1);
+            }
+
+            .letter-front,
+            .letter-back {
+              padding: 20px 18px;
+            }
+
+            .letter-content-front {
+              max-width: 100%;
+            }
+
+            .letter-headline {
+              font-size: 24px;
+            }
+
+            .letter-details {
+              gap: 6px;
+              padding: 12px 0;
+            }
+
+            .detail-block {
+              flex-direction: column;
+              gap: 2px;
+            }
+
+            .detail-label {
+              min-width: auto;
+              font-size: 8px;
+            }
+
+            .detail-value {
               font-size: 13px;
             }
 
-            .letter.slide-out {
-              transform: translateY(-60px) scale(1);
+            .letter-body,
+            .letter-body-secondary {
+              font-size: 13px;
             }
 
-            @keyframes letterReveal {
-              0% {
-                transform: translateY(-30px) scale(0.85);
-                opacity: 0;
-              }
-              100% {
-                transform: translateY(-60px) scale(1);
-                opacity: 1;
-              }
+            .letter-tagline {
+              font-size: 14px;
+            }
+
+            .back-headline {
+              font-size: 19px;
+            }
+
+            .back-body {
+              font-size: 13px;
+            }
+
+            .btn-open,
+            .btn-flip {
+              padding: 10px 20px;
+              font-size: 10px;
+              letter-spacing: 1.2px;
+            }
+          }
+
+          @media (max-width: 420px) {
+            .envelope-wrapper {
+              max-width: 320px;
+            }
+
+            .container {
+              padding: 16px;
+            }
+
+            .envelope-body {
+              padding: 12px 16px;
+            }
+
+            .envelope-content {
+              gap: 10px;
+            }
+
+            .envelope-title {
+              font-size: 15px;
+            }
+
+            .envelope-label {
+              font-size: 8px;
+              letter-spacing: 2px;
+            }
+
+            .envelope-logo img {
+              width: 32px;
+              height: 32px;
+            }
+
+            .envelope-accent {
+              width: 18px;
+              height: 18px;
+            }
+
+            .envelope-accent::after {
+              width: 4px;
+              height: 4px;
+            }
+
+            .letter {
+              top: 8px;
+              left: 12px;
+              right: 12px;
+              bottom: 8px;
+            }
+
+            .letter.reveal {
+              transform: translateY(-24px) scale(1);
+            }
+
+            .letter-front,
+            .letter-back {
+              padding: 16px 14px;
+            }
+
+            .letter-headline {
+              font-size: 20px;
+              margin-bottom: 14px;
+            }
+
+            .letter-header {
+              margin-bottom: 14px;
+              gap: 8px;
+            }
+
+            .letter-brand {
+              font-size: 8px;
+              letter-spacing: 3px;
+            }
+
+            .letter-event {
+              font-size: 7px;
+              letter-spacing: 2px;
+            }
+
+            .detail-value {
+              font-size: 12px;
+            }
+
+            .letter-body,
+            .letter-body-secondary {
+              font-size: 12px;
+            }
+
+            .back-headline {
+              font-size: 17px;
+            }
+
+            .btn-open,
+            .btn-flip {
+              padding: 8px 16px;
+              font-size: 9px;
+              gap: 8px;
+            }
+          }
+
+          @media (min-width: 1200px) {
+            .envelope-wrapper {
+              max-width: 560px;
+            }
+
+            .letter-headline {
+              font-size: 38px;
+            }
+
+            .letter-body,
+            .letter-body-secondary {
+              font-size: 15px;
+            }
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+              animation-duration: 0.01ms !important;
+              transition-duration: 0.01ms !important;
             }
           }
         `}</style>
