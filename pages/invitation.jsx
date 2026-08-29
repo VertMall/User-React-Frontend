@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
@@ -7,827 +7,830 @@ const Invitation = () => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsOpen(true), 1200);
+    const timer = setTimeout(() => setIsOpen(true), 1400);
     return () => clearTimeout(timer);
   }, []);
-
-  const handleOpen = () => setIsOpen(true);
-  const handleFlip = () => setIsFlipped(!isFlipped);
 
   return (
     <>
       <Head>
-        <title>VertMall Grand Launch</title>
+        <title>VertMall — Grand Launch</title>
         <meta
           name="description"
-          content="You are invited to witness the official launch of VertMall. Monday, 31st August 2026, 10:00 AM — 10:45 AM, Umuahia."
+          content="You are invited to the official launch of VertMall."
         />
         <link rel="icon" href="/logo.png" />
         <link rel="apple-touch-icon" href="/logo.png" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
       </Head>
 
-      <div className="container">
-        <div className={`envelope-wrapper ${isOpen ? 'open' : ''}`}>
-          {/* Envelope */}
-          <div className="envelope">
-            <div className="envelope-front">
-              <div className="envelope-flap"></div>
-              <div className="envelope-body">
-                <div className="envelope-content">
-                  <div className="envelope-logo">
-                    <Image src="/logo.png" alt="VertMall" width={56} height={56} />
-                  </div>
-                  <div className="envelope-text">
-                    <span className="envelope-label">Invitation</span>
-                    <span className="envelope-title">VertMall</span>
-                  </div>
-                  <div className="envelope-accent"></div>
-                </div>
-              </div>
-            </div>
-
-            {/* Letter */}
-            <div className={`letter ${isOpen ? 'reveal' : ''}`}>
-              <div className={`letter-inner ${isFlipped ? 'flipped' : ''}`}>
-                {/* Front */}
-                <div className="letter-front">
-                  <div className="letter-content-front">
-                    <div className="letter-header">
-                      <span className="letter-brand">VertMall</span>
-                      <span className="letter-rule"></span>
-                      <span className="letter-event">Grand Launch</span>
-                    </div>
-
-                    <h1 className="letter-headline">
-                      You are invited<br />
-                      to witness the<br />
-                      official launch
-                    </h1>
-
-                    <div className="letter-details">
-                      <div className="detail-block">
-                        <span className="detail-label">Date</span>
-                        <span className="detail-value">Monday, 31st August 2026</span>
-                      </div>
-                      <div className="detail-block">
-                        <span className="detail-label">Time</span>
-                        <span className="detail-value">10:00 AM — 10:45 AM</span>
-                      </div>
-                      <div className="detail-block">
-                        <span className="detail-label">Venue</span>
-                        <span className="detail-value">Umuahia</span>
-                      </div>
-                    </div>
-
-                    <div className="letter-divider"></div>
-
-                    <p className="letter-body">
-                      Join us as we unveil a new way to shop, connect,<br />
-                      and experience convenience in Umuahia.
-                    </p>
-
-                    <p className="letter-body-secondary">
-                      We would be honored to have you experience<br />
-                      VertMall firsthand.
-                    </p>
-
-                    <div className="letter-footer">
-                      <span className="letter-tagline">The VertMall Xperience….</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Back */}
-                <div className="letter-back">
-                  <div className="letter-content-back">
-                    <div className="back-logo">
-                      <Image src="/logo.png" alt="VertMall" width={64} height={64} />
-                    </div>
-
-                    <h3 className="back-headline">We Look Forward<br />to Welcoming You</h3>
-
-                    <p className="back-body">
-                      VertMall is redefining the shopping experience<br />
-                      in Umuahia and beyond.
-                    </p>
-
-                    <div className="back-divider"></div>
-
-                    <div className="back-contact">
-                      <span className="back-contact-label">For questions</span>
-                      <a href="mailto:support@thevertmall.com" className="back-contact-email">
-                        support@thevertmall.com
-                      </a>
-                    </div>
-
-                    <div className="back-brand">VertMall</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Controls */}
-          <div className="controls">
-            {!isOpen ? (
-              <button className="btn-open" onClick={handleOpen}>
-                <span className="btn-label">Open Invitation</span>
-                <span className="btn-arrow">→</span>
-              </button>
-            ) : (
-              <button className="btn-flip" onClick={handleFlip}>
-                {isFlipped ? 'Front' : 'Back'}
-                <span className="btn-flip-icon">⟳</span>
-              </button>
-            )}
-          </div>
+      <main className={`invitation ${isOpen ? 'is-open' : ''}`}>
+        {/* Background */}
+        <div className="background">
+          <div className="background-glow" />
+          <div className="background-line line-one" />
+          <div className="background-line line-two" />
         </div>
 
-        <style jsx>{`
-          * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        {/* Brand mark */}
+        <header className="brand">
+          <Image
+            src="/logo.png"
+            alt="VertMall"
+            width={46}
+            height={46}
+            priority
+          />
+          <span>VERTMALL</span>
+        </header>
+
+        {/* Opening state */}
+        <section className={`opening ${isOpen ? 'hidden' : ''}`}>
+          <div className="opening-inner">
+            <span className="eyebrow">A SPECIAL INVITATION</span>
+
+            <div className="envelope">
+              <div className="envelope-paper">
+                <div className="paper-top">
+                  <Image
+                    src="/logo.png"
+                    alt="VertMall"
+                    width={58}
+                    height={58}
+                  />
+                </div>
+
+                <div className="paper-content">
+                  <span>VERTMALL</span>
+                  <strong>GRAND LAUNCH</strong>
+                </div>
+
+                <div className="paper-bottom">
+                  <span>31.08.26</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              className="open-button"
+              onClick={() => setIsOpen(true)}
+            >
+              <span>OPEN INVITATION</span>
+              <span className="arrow">→</span>
+            </button>
+          </div>
+        </section>
+
+        {/* Main invitation */}
+        <section className={`invitation-stage ${isOpen ? 'visible' : ''}`}>
+          <div className="card-wrapper">
+            <div className={`card ${isFlipped ? 'flipped' : ''}`}>
+
+              {/* FRONT */}
+              <article className="card-face card-front">
+                <div className="card-top">
+                  <div className="card-brand">
+                    <Image
+                      src="/logo.png"
+                      alt="VertMall"
+                      width={48}
+                      height={48}
+                    />
+                    <span>VERTMALL</span>
+                  </div>
+
+                  <span className="edition">
+                    01 / 01
+                  </span>
+                </div>
+
+                <div className="hero-content">
+                  <span className="eyebrow gold">
+                    YOU ARE CORDIALLY INVITED
+                  </span>
+
+                  <h1>
+                    The beginning
+                    <br />
+                    of something
+                    <br />
+                    <em>new.</em>
+                  </h1>
+
+                  <div className="hero-rule" />
+
+                  <p className="intro">
+                    Join us as we officially unveil
+                    <strong> VertMall</strong> — a new way
+                    to shop, connect, and experience
+                    convenience in Umuahia.
+                  </p>
+                </div>
+
+                <div className="details">
+                  <div className="detail">
+                    <span className="detail-label">DATE</span>
+                    <span className="detail-value">
+                      Monday, 31st August 2026
+                    </span>
+                  </div>
+
+                  <div className="detail">
+                    <span className="detail-label">TIME</span>
+                    <span className="detail-value">
+                      10:00 AM — 10:45 AM
+                    </span>
+                  </div>
+
+                  <div className="detail">
+                    <span className="detail-label">VENUE</span>
+                    <span className="detail-value">
+                      Umuahia
+                    </span>
+                  </div>
+                </div>
+
+                <div className="card-footer">
+                  <span>The VertMall Xperience…</span>
+
+                  <button
+                    onClick={() => setIsFlipped(true)}
+                    className="flip-button"
+                  >
+                    <span>MORE</span>
+                    <span>→</span>
+                  </button>
+                </div>
+              </article>
+
+              {/* BACK */}
+              <article className="card-face card-back">
+                <div className="back-content">
+                  <div className="back-logo">
+                    <Image
+                      src="/logo.png"
+                      alt="VertMall"
+                      width={70}
+                      height={70}
+                    />
+                  </div>
+
+                  <span className="eyebrow gold">
+                    VERTMALL
+                  </span>
+
+                  <h2>
+                    We look forward
+                    <br />
+                    to welcoming you.
+                  </h2>
+
+                  <div className="back-rule" />
+
+                  <p>
+                    A new way to shop, connect,
+                    and experience convenience.
+                  </p>
+
+                  <div className="contact">
+                    <span>FOR QUESTIONS</span>
+                    <a href="mailto:support@thevertmall.com">
+                      support@thevertmall.com
+                    </a>
+                  </div>
+                </div>
+
+                <div className="back-footer">
+                  <span>VERTMALL</span>
+
+                  <button
+                    onClick={() => setIsFlipped(false)}
+                    className="flip-button"
+                  >
+                    <span>←</span>
+                    <span>BACK</span>
+                  </button>
+                </div>
+              </article>
+
+            </div>
+          </div>
+        </section>
+
+        <footer className="page-footer">
+          <span>VERTMALL</span>
+          <span>THE FUTURE OF CONVENIENCE</span>
+        </footer>
+      </main>
+
+      <style jsx>{`
+        * {
+          box-sizing: border-box;
+        }
+
+        .invitation {
+          min-height: 100vh;
+          width: 100%;
+          background: #0c1d13;
+          color: #f4f0e8;
+          font-family: 'DM Sans', sans-serif;
+          position: relative;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .background {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          overflow: hidden;
+        }
+
+        .background-glow {
+          position: absolute;
+          width: 700px;
+          height: 700px;
+          border-radius: 50%;
+          background: rgba(50, 105, 67, 0.15);
+          filter: blur(100px);
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        .background-line {
+          position: absolute;
+          height: 1px;
+          width: 42vw;
+          background: rgba(201, 168, 76, 0.13);
+        }
+
+        .line-one {
+          top: 18%;
+          left: -10%;
+          transform: rotate(-18deg);
+        }
+
+        .line-two {
+          bottom: 17%;
+          right: -10%;
+          transform: rotate(-18deg);
+        }
+
+        .brand {
+          position: absolute;
+          top: 38px;
+          left: 42px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          z-index: 20;
+        }
+
+        .brand img {
+          border-radius: 50%;
+        }
+
+        .brand span {
+          font-size: 11px;
+          letter-spacing: 4px;
+          font-weight: 500;
+        }
+
+        .opening {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10;
+          transition:
+            opacity 0.8s ease,
+            visibility 0.8s ease,
+            transform 0.8s ease;
+        }
+
+        .opening.hidden {
+          opacity: 0;
+          visibility: hidden;
+          transform: scale(1.04);
+          pointer-events: none;
+        }
+
+        .opening-inner {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .eyebrow {
+          font-size: 10px;
+          letter-spacing: 4px;
+          font-weight: 500;
+          color: rgba(244, 240, 232, 0.55);
+        }
+
+        .gold {
+          color: #c9a84c;
+        }
+
+        .envelope {
+          width: 420px;
+          height: 280px;
+          margin: 28px 0 35px;
+          padding: 14px;
+          border: 1px solid rgba(201, 168, 76, 0.25);
+          background: rgba(244, 240, 232, 0.035);
+        }
+
+        .envelope-paper {
+          height: 100%;
+          width: 100%;
+          background: #f4f0e8;
+          color: #173522;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 28px;
+          box-shadow: 0 35px 90px rgba(0, 0, 0, 0.35);
+        }
+
+        .paper-top {
+          display: flex;
+          justify-content: center;
+        }
+
+        .paper-top img {
+          border-radius: 50%;
+        }
+
+        .paper-content {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .paper-content span {
+          font-size: 10px;
+          letter-spacing: 5px;
+        }
+
+        .paper-content strong {
+          font-family: 'Playfair Display', serif;
+          font-size: 30px;
+          font-weight: 500;
+          letter-spacing: -0.5px;
+        }
+
+        .paper-bottom {
+          display: flex;
+          justify-content: flex-end;
+          font-size: 10px;
+          letter-spacing: 3px;
+          color: #806f42;
+        }
+
+        .open-button {
+          background: none;
+          border: none;
+          border-bottom: 1px solid rgba(201, 168, 76, 0.6);
+          padding: 0 0 10px;
+          color: #f4f0e8;
+          font-size: 10px;
+          letter-spacing: 3px;
+          cursor: pointer;
+          display: flex;
+          gap: 20px;
+          align-items: center;
+          transition: gap 0.3s ease;
+        }
+
+        .open-button:hover {
+          gap: 30px;
+        }
+
+        .arrow {
+          color: #c9a84c;
+          font-size: 17px;
+        }
+
+        .invitation-stage {
+          position: relative;
+          z-index: 5;
+          opacity: 0;
+          transform: translateY(25px);
+          pointer-events: none;
+          transition:
+            opacity 1s ease 0.3s,
+            transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+        }
+
+        .invitation-stage.visible {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+
+        .card-wrapper {
+          width: min(850px, calc(100vw - 50px));
+          height: min(610px, calc(100vh - 120px));
+          perspective: 1800px;
+        }
+
+        .card {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          transform-style: preserve-3d;
+          transition: transform 0.9s cubic-bezier(0.2, 0.75, 0.25, 1);
+        }
+
+        .card.flipped {
+          transform: rotateY(180deg);
+        }
+
+        .card-face {
+          position: absolute;
+          inset: 0;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+        }
+
+        .card-front {
+          background: #f4f0e8;
+          color: #193723;
+          padding: 45px 55px;
+          display: flex;
+          flex-direction: column;
+          box-shadow:
+            0 40px 100px rgba(0, 0, 0, 0.35),
+            0 0 0 1px rgba(201, 168, 76, 0.12);
+        }
+
+        .card-front::before {
+          content: '';
+          position: absolute;
+          inset: 13px;
+          border: 1px solid rgba(25, 55, 35, 0.13);
+          pointer-events: none;
+        }
+
+        .card-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .card-brand {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .card-brand img {
+          border-radius: 50%;
+        }
+
+        .card-brand span {
+          font-size: 10px;
+          letter-spacing: 4px;
+          font-weight: 600;
+        }
+
+        .edition {
+          font-size: 9px;
+          letter-spacing: 2px;
+          color: rgba(25, 55, 35, 0.45);
+        }
+
+        .hero-content {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          max-width: 650px;
+        }
+
+        .hero-content h1 {
+          font-family: 'Playfair Display', serif;
+          font-weight: 400;
+          font-size: clamp(44px, 6vw, 72px);
+          line-height: 0.98;
+          letter-spacing: -2.5px;
+          margin: 18px 0 25px;
+          color: #173522;
+        }
+
+        .hero-content h1 em {
+          color: #8e7737;
+          font-weight: 400;
+        }
+
+        .hero-rule {
+          width: 55px;
+          height: 1px;
+          background: #c9a84c;
+          margin-bottom: 22px;
+        }
+
+        .intro {
+          max-width: 450px;
+          font-size: 13px;
+          line-height: 1.8;
+          color: rgba(25, 55, 35, 0.72);
+          font-weight: 300;
+          margin: 0;
+        }
+
+        .intro strong {
+          color: #173522;
+          font-weight: 600;
+        }
+
+        .details {
+          display: grid;
+          grid-template-columns: 1.5fr 1fr 0.7fr;
+          border-top: 1px solid rgba(25, 55, 35, 0.15);
+          border-bottom: 1px solid rgba(25, 55, 35, 0.15);
+          padding: 18px 0;
+        }
+
+        .detail {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          padding-right: 20px;
+        }
+
+        .detail + .detail {
+          padding-left: 25px;
+          border-left: 1px solid rgba(25, 55, 35, 0.12);
+        }
+
+        .detail-label {
+          font-size: 8px;
+          letter-spacing: 3px;
+          color: #8e7737;
+          font-weight: 600;
+        }
+
+        .detail-value {
+          font-size: 12px;
+          color: #173522;
+          font-weight: 500;
+        }
+
+        .card-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-top: 18px;
+        }
+
+        .card-footer > span {
+          font-family: 'Playfair Display', serif;
+          font-size: 15px;
+          font-style: italic;
+          color: #8e7737;
+        }
+
+        .flip-button {
+          border: none;
+          background: none;
+          color: #173522;
+          font-size: 9px;
+          letter-spacing: 3px;
+          cursor: pointer;
+          display: flex;
+          gap: 13px;
+          align-items: center;
+          padding: 5px 0;
+        }
+
+        .flip-button span:last-child {
+          color: #8e7737;
+        }
+
+        .card-back {
+          transform: rotateY(180deg);
+          background: #173522;
+          color: #f4f0e8;
+          padding: 50px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .card-back::before {
+          content: '';
+          position: absolute;
+          inset: 13px;
+          border: 1px solid rgba(201, 168, 76, 0.22);
+        }
+
+        .back-content {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+
+        .back-logo {
+          margin-bottom: 20px;
+        }
+
+        .back-logo img {
+          border-radius: 50%;
+        }
+
+        .back-content h2 {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(34px, 5vw, 52px);
+          line-height: 1.1;
+          font-weight: 400;
+          margin: 20px 0;
+        }
+
+        .back-rule {
+          width: 45px;
+          height: 1px;
+          background: #c9a84c;
+          margin: 5px 0 22px;
+        }
+
+        .back-content p {
+          max-width: 330px;
+          font-size: 13px;
+          line-height: 1.8;
+          color: rgba(244, 240, 232, 0.65);
+          font-weight: 300;
+        }
+
+        .contact {
+          margin-top: 45px;
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+        }
+
+        .contact span {
+          font-size: 8px;
+          letter-spacing: 3px;
+          color: #c9a84c;
+        }
+
+        .contact a {
+          color: #f4f0e8;
+          text-decoration: none;
+          font-size: 12px;
+        }
+
+        .back-footer {
+          position: absolute;
+          bottom: 35px;
+          left: 55px;
+          right: 55px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 9px;
+          letter-spacing: 3px;
+        }
+
+        .back-footer .flip-button {
+          color: #f4f0e8;
+        }
+
+        .page-footer {
+          position: absolute;
+          bottom: 30px;
+          left: 42px;
+          right: 42px;
+          display: flex;
+          justify-content: space-between;
+          color: rgba(244, 240, 232, 0.3);
+          font-size: 8px;
+          letter-spacing: 3px;
+          z-index: 20;
+        }
+
+        @media (max-width: 700px) {
+          .brand {
+            top: 22px;
+            left: 22px;
           }
 
-          .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: #0d1f12;
-            font-family: 'Inter', -apple-system, sans-serif;
-            padding: 24px;
-            position: relative;
+          .brand img {
+            width: 34px;
+            height: 34px;
           }
 
-          .envelope-wrapper {
-            perspective: 1400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 32px;
-            width: 100%;
-            max-width: 520px;
+          .brand span {
+            font-size: 9px;
+            letter-spacing: 3px;
           }
 
-          /* Envelope */
           .envelope {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1.45 / 1;
-            transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            width: min(350px, calc(100vw - 50px));
+            height: 235px;
           }
 
-          .envelope-front {
-            position: absolute;
-            inset: 0;
-            background: #f7f3ed;
-            border-radius: 4px;
-            box-shadow: 0 16px 64px rgba(0, 0, 0, 0.35);
-            overflow: hidden;
-            z-index: 2;
-            backface-visibility: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+          .paper-content strong {
+            font-size: 24px;
           }
 
-          .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: #f0e9e0;
-            clip-path: polygon(0 0, 100% 0, 50% 100%);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: top;
-            z-index: 3;
+          .card-wrapper {
+            width: calc(100vw - 30px);
+            height: calc(100vh - 100px);
+            max-height: 700px;
           }
 
-          .envelope.open .envelope-flap {
-            transform: rotateX(180deg);
+          .card-front {
+            padding: 35px 28px;
           }
 
-          .envelope-body {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 55%;
-            padding: 20px 32px;
-            display: flex;
-            align-items: center;
-            background: #f7f3ed;
-            border-top: 1px solid rgba(0, 0, 0, 0.04);
+          .card-front::before,
+          .card-back::before {
+            inset: 8px;
           }
 
-          .envelope-content {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
+          .hero-content h1 {
+            font-size: clamp(39px, 11vw, 58px);
+            letter-spacing: -1.8px;
           }
 
-          .envelope-logo {
-            flex-shrink: 0;
+          .details {
+            grid-template-columns: 1fr;
+            gap: 13px;
           }
 
-          .envelope-logo img {
-            border-radius: 50%;
-            opacity: 0.9;
+          .detail {
+            padding: 0;
           }
 
-          .envelope-text {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-          }
-
-          .envelope-label {
-            font-size: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #8a7a6a;
-            font-weight: 400;
-          }
-
-          .envelope-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            font-weight: 600;
-            color: #1a3a2a;
-            letter-spacing: 1px;
-          }
-
-          .envelope-accent {
-            margin-left: auto;
-            width: 28px;
-            height: 28px;
-            border: 1px solid rgba(201, 168, 76, 0.25);
-            border-radius: 50%;
-            position: relative;
-          }
-
-          .envelope-accent::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
-            background: rgba(201, 168, 76, 0.3);
-            border-radius: 50%;
-          }
-
-          /* Letter */
-          .letter {
-            position: absolute;
-            top: 16px;
-            left: 24px;
-            right: 24px;
-            bottom: 16px;
-            background: #fcfaf7;
-            border-radius: 3px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-            transform: translateY(0) scale(0.94);
-            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1;
-            overflow: hidden;
-            transform-origin: bottom center;
-            opacity: 0;
-            pointer-events: none;
-            border: 1px solid rgba(0, 0, 0, 0.04);
-          }
-
-          .letter.reveal {
-            transform: translateY(-48px) scale(1);
-            opacity: 1;
-            pointer-events: all;
-            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.2);
-            z-index: 5;
-            transition-delay: 0.1s;
-          }
-
-          .letter-inner {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-          }
-
-          .letter-inner.flipped {
-            transform: rotateY(180deg);
-          }
-
-          .letter-front,
-          .letter-back {
-            position: absolute;
-            inset: 0;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            padding: 28px 32px;
-            overflow-y: auto;
-          }
-
-          .letter-front {
-            background: #fcfaf7;
-          }
-
-          .letter-back {
-            background: #f7f3ed;
-            transform: rotateY(180deg);
-            justify-content: center;
-            align-items: center;
-          }
-
-          .letter-content-front {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex: 1;
-            max-width: 420px;
-            margin: 0 auto;
-            width: 100%;
-          }
-
-          .letter-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 18px;
-          }
-
-          .letter-brand {
-            font-size: 10px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #1a3a2a;
-            font-weight: 500;
-          }
-
-          .letter-rule {
-            flex: 1;
-            height: 1px;
-            background: rgba(201, 168, 76, 0.2);
-            max-width: 40px;
-          }
-
-          .letter-event {
-            font-size: 9px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #8a7a6a;
-            font-weight: 400;
-          }
-
-          .letter-headline {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: 600;
-            color: #0d1f12;
-            line-height: 1.2;
-            margin: 0 0 20px 0;
-            letter-spacing: -0.5px;
-          }
-
-          .letter-details {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 16px;
-            padding: 16px 0;
-            border-top: 1px solid rgba(0, 0, 0, 0.04);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-          }
-
-          .detail-block {
-            display: flex;
-            align-items: baseline;
-            gap: 20px;
-          }
-
-          .detail-label {
-            font-size: 9px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #8a7a6a;
-            font-weight: 500;
-            min-width: 48px;
+          .detail + .detail {
+            padding-left: 0;
+            border-left: none;
           }
 
           .detail-value {
-            font-size: 14px;
-            color: #1a3a2a;
-            font-weight: 400;
+            font-size: 11px;
           }
 
-          .letter-divider {
-            width: 32px;
-            height: 1px;
-            background: rgba(201, 168, 76, 0.25);
-            margin: 4px 0 12px 0;
+          .card-footer {
+            padding-top: 15px;
           }
 
-          .letter-body {
-            font-size: 14px;
-            line-height: 1.7;
-            color: #2d3d3a;
-            font-weight: 300;
-            margin: 0 0 6px 0;
+          .card-footer > span {
+            font-size: 13px;
           }
 
-          .letter-body-secondary {
-            font-size: 14px;
-            line-height: 1.7;
-            color: #2d3d3a;
-            font-weight: 300;
-            margin: 0 0 16px 0;
+          .card-back {
+            padding: 35px 28px;
           }
 
-          .letter-footer {
-            margin-top: auto;
-            padding-top: 12px;
-            border-top: 1px solid rgba(0, 0, 0, 0.04);
+          .back-content h2 {
+            font-size: 38px;
           }
 
-          .letter-tagline {
-            font-family: 'Playfair Display', serif;
-            font-size: 15px;
-            font-style: italic;
-            color: #c9a84c;
-            letter-spacing: 0.5px;
+          .back-footer {
+            left: 30px;
+            right: 30px;
+            bottom: 25px;
           }
 
-          /* Back */
-          .letter-content-back {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            max-width: 320px;
+          .page-footer {
+            display: none;
+          }
+        }
+
+        @media (max-height: 700px) and (min-width: 701px) {
+          .card-wrapper {
+            height: calc(100vh - 100px);
           }
 
-          .back-logo {
-            margin-bottom: 16px;
+          .card-front {
+            padding: 30px 45px;
           }
 
-          .back-logo img {
-            border-radius: 50%;
-            opacity: 0.85;
+          .hero-content h1 {
+            font-size: 52px;
           }
 
-          .back-headline {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            font-weight: 600;
-            color: #0d1f12;
-            line-height: 1.3;
-            margin: 0 0 12px 0;
+          .details {
+            padding: 12px 0;
           }
-
-          .back-body {
-            font-size: 14px;
-            line-height: 1.7;
-            color: #2d3d3a;
-            font-weight: 300;
-            margin: 0 0 16px 0;
-          }
-
-          .back-divider {
-            width: 32px;
-            height: 1px;
-            background: rgba(201, 168, 76, 0.2);
-            margin: 4px 0 16px 0;
-          }
-
-          .back-contact {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            margin-bottom: 20px;
-          }
-
-          .back-contact-label {
-            font-size: 9px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #8a7a6a;
-            font-weight: 400;
-          }
-
-          .back-contact-email {
-            font-size: 14px;
-            color: #1a3a2a;
-            text-decoration: none;
-            font-weight: 400;
-            transition: color 0.3s ease;
-          }
-
-          .back-contact-email:hover {
-            color: #c9a84c;
-          }
-
-          .back-brand {
-            font-size: 10px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #1a3a2a;
-            font-weight: 500;
-            opacity: 0.3;
-            margin-top: 4px;
-          }
-
-          /* Controls */
-          .controls {
-            display: flex;
-            gap: 16px;
-            margin-top: 4px;
-          }
-
-          .btn-open,
-          .btn-flip {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 28px;
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: rgba(255, 255, 255, 0.7);
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border-radius: 2px;
-            font-weight: 400;
-          }
-
-          .btn-open:hover,
-          .btn-flip:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-          }
-
-          .btn-arrow {
-            font-size: 16px;
-            transition: transform 0.4s ease;
-            display: inline-block;
-          }
-
-          .btn-open:hover .btn-arrow {
-            transform: translateX(4px);
-          }
-
-          .btn-label {
-            font-weight: 300;
-          }
-
-          .btn-flip-icon {
-            font-size: 16px;
-            opacity: 0.5;
-            transition: transform 0.6s ease;
-            display: inline-block;
-          }
-
-          .btn-flip:hover .btn-flip-icon {
-            transform: rotate(180deg);
-          }
-
-          /* Responsive */
-          @media (max-width: 600px) {
-            .envelope-wrapper {
-              max-width: 400px;
-            }
-
-            .envelope-body {
-              padding: 16px 20px;
-            }
-
-            .envelope-content {
-              gap: 14px;
-            }
-
-            .envelope-title {
-              font-size: 18px;
-            }
-
-            .envelope-logo img {
-              width: 40px;
-              height: 40px;
-            }
-
-            .envelope-accent {
-              width: 22px;
-              height: 22px;
-            }
-
-            .envelope-accent::after {
-              width: 6px;
-              height: 6px;
-            }
-
-            .letter {
-              top: 12px;
-              left: 16px;
-              right: 16px;
-              bottom: 12px;
-            }
-
-            .letter.reveal {
-              transform: translateY(-32px) scale(1);
-            }
-
-            .letter-front,
-            .letter-back {
-              padding: 20px 18px;
-            }
-
-            .letter-content-front {
-              max-width: 100%;
-            }
-
-            .letter-headline {
-              font-size: 24px;
-            }
-
-            .letter-details {
-              gap: 6px;
-              padding: 12px 0;
-            }
-
-            .detail-block {
-              flex-direction: column;
-              gap: 2px;
-            }
-
-            .detail-label {
-              min-width: auto;
-              font-size: 8px;
-            }
-
-            .detail-value {
-              font-size: 13px;
-            }
-
-            .letter-body,
-            .letter-body-secondary {
-              font-size: 13px;
-            }
-
-            .letter-tagline {
-              font-size: 14px;
-            }
-
-            .back-headline {
-              font-size: 19px;
-            }
-
-            .back-body {
-              font-size: 13px;
-            }
-
-            .btn-open,
-            .btn-flip {
-              padding: 10px 20px;
-              font-size: 10px;
-              letter-spacing: 1.2px;
-            }
-          }
-
-          @media (max-width: 420px) {
-            .envelope-wrapper {
-              max-width: 320px;
-            }
-
-            .container {
-              padding: 16px;
-            }
-
-            .envelope-body {
-              padding: 12px 16px;
-            }
-
-            .envelope-content {
-              gap: 10px;
-            }
-
-            .envelope-title {
-              font-size: 15px;
-            }
-
-            .envelope-label {
-              font-size: 8px;
-              letter-spacing: 2px;
-            }
-
-            .envelope-logo img {
-              width: 32px;
-              height: 32px;
-            }
-
-            .envelope-accent {
-              width: 18px;
-              height: 18px;
-            }
-
-            .envelope-accent::after {
-              width: 4px;
-              height: 4px;
-            }
-
-            .letter {
-              top: 8px;
-              left: 12px;
-              right: 12px;
-              bottom: 8px;
-            }
-
-            .letter.reveal {
-              transform: translateY(-24px) scale(1);
-            }
-
-            .letter-front,
-            .letter-back {
-              padding: 16px 14px;
-            }
-
-            .letter-headline {
-              font-size: 20px;
-              margin-bottom: 14px;
-            }
-
-            .letter-header {
-              margin-bottom: 14px;
-              gap: 8px;
-            }
-
-            .letter-brand {
-              font-size: 8px;
-              letter-spacing: 3px;
-            }
-
-            .letter-event {
-              font-size: 7px;
-              letter-spacing: 2px;
-            }
-
-            .detail-value {
-              font-size: 12px;
-            }
-
-            .letter-body,
-            .letter-body-secondary {
-              font-size: 12px;
-            }
-
-            .back-headline {
-              font-size: 17px;
-            }
-
-            .btn-open,
-            .btn-flip {
-              padding: 8px 16px;
-              font-size: 9px;
-              gap: 8px;
-            }
-          }
-
-          @media (min-width: 1200px) {
-            .envelope-wrapper {
-              max-width: 560px;
-            }
-
-            .letter-headline {
-              font-size: 38px;
-            }
-
-            .letter-body,
-            .letter-body-secondary {
-              font-size: 15px;
-            }
-          }
-
-          @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-              animation-duration: 0.01ms !important;
-              transition-duration: 0.01ms !important;
-            }
-          }
-        `}</style>
-      </div>
+        }
+      `}
+      </style>
     </>
   );
 };
