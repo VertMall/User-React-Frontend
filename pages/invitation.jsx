@@ -148,7 +148,7 @@ const Invitation = () => {
                   <div className="detail">
                     <span className="detail-label">VENUE</span>
                     <span className="detail-value">
-                      Umuahia
+                      53 Orlu Street by Enugu Road,Umuahia, Abia State
                     </span>
                   </div>
                 </div>
